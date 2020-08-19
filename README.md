@@ -28,6 +28,15 @@
 | user    | references | null: false, foreign_key: true |
 | fee     | integer    | null: false                    |
 
+### ActiveHash
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| category| string     | null: false                    |
+| state   | string     | null: false                    |
+| place   | string     | null: false                    |
+| dispatch| string     | null: false                    |
+
 ### Association
 
 - belongs_to :user
@@ -70,11 +79,16 @@
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
 | postal    | string     | nill:false                     |
-| prefecture| string     | nill:false                     |
 | city      | string     | nill:false                     |
 | address   | string     | nill:false                     |
 | building  | string     | nill:true                      |
 | tel       | string     | nill:false                     |
+
+### ActiveHash
+
+| Column    | Type       | Options                        |
+| -------   | ---------- | ------------------------------ |
+| prefecture| string     | nill:false                     |
 
 ### Association
 
