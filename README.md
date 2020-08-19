@@ -32,11 +32,11 @@
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| category| string     | null: false                    |
-| state   | string     | null: false                    |
+| category| integer    | null: false                    |
+| state   | integer    | null: false                    |
 | fee     | integer    | null: false                    |
-| place   | string     | null: false                    |
-| dispatch| string     | null: false                    |
+| place   | integer    | null: false                    |
+| dispatch| integer    | null: false                    |
 
 ### Association
 
@@ -74,13 +74,13 @@
 
 | Column    | Type       | Options                        |
 | -------   | ---------- | ------------------------------ |
-| prefecture| string     | null:false                     |
+| prefecture| integer    | null:false                     |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
-- has_many :buy_histories
+- belongs_to :buy_history
 
 ## buy_histories テーブル
 
@@ -88,11 +88,9 @@
 | -------    | ---------- | ------------------------------ |
 | user       | references | null: false, foreign_key: true |
 | item       | references | null: false, foreign_key: true |
-| destination| references | null: false, foreign_key: true |
-| buy_date   | date       | null:false                     |
 
 ### Association
 
-- belongs_to :user
-- belongs_to :item
-- belongs_to :destination
+- has_one :user
+- has_one :item
+- has_one :destination
