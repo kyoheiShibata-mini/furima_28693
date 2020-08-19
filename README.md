@@ -5,6 +5,7 @@
 | Column     | Type   | Options     |
 | --------   | ------ | ----------- |
 | name       | string | null: false |
+| name_kana  | string | null: false |
 | email      | string | null: false |
 | password   | string | null: false |
 | first_name | string | null: false |
@@ -15,7 +16,8 @@
 
 - has_many :items
 - has_many :comments
-- has_many :buys
+- has_many :credits
+- has_many :destinations
 
 ## items テーブル
 
@@ -24,17 +26,14 @@
 | name    | string     | null: false                    |
 | price   | integer    | null: false                    |
 | user    | references | null: false, foreign_key: true |
-| category| string     | null: false                    |
-| state   | string     | null: false                    |
 | fee     | integer    | null: false                    |
-| place   | string     | null: false                    |
-| dispatch| string     | null: false                    |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_many :comments
-- has_one :buys
+- has_one :credit
+- has_one :destination
 
 ## comments テーブル
 
@@ -46,10 +45,10 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 
-## buys テーブル
+## credits テーブル
 
 | Column    | Type       | Options                        |
 | -------   | ---------- | ------------------------------ |
@@ -58,14 +57,26 @@
 | credit    | integer    | nill:false                     |
 | expiration| integer    | nill:false                     |
 | s_cord    | integer    | nill:false                     |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+
+## destinations テーブル
+
+| Column    | Type       | Options                        |
+| -------   | ---------- | ------------------------------ |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 | postal    | string     | nill:false                     |
 | prefecture| string     | nill:false                     |
 | city      | string     | nill:false                     |
 | address   | string     | nill:false                     |
+| building  | string     | nill:true                      |
 | tel       | string     | nill:false                     |
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
-
+- belongs_to :user
+- belongs_to :item
