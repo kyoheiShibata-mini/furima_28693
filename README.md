@@ -43,7 +43,7 @@
 - belongs_to :user
 - has_many :comments
 - has_one :destination
-- has_one :buy_history
+- belongs_to :buy_history
 
 ## comments テーブル
 
@@ -80,7 +80,7 @@
 
 - belongs_to :user
 - belongs_to :item
-- belongs_to :buy_history
+- has_many :buy_histories
 
 ## buy_histories テーブル
 
@@ -91,6 +91,6 @@
 
 ### Association
 
-- has_one :user
+- belongs_to :user
 - has_one :item
-- has_one :destination
+- belongs_to :destination
