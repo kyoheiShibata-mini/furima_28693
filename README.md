@@ -4,20 +4,21 @@
 
 | Column     | Type   | Options     |
 | --------   | ------ | ----------- |
-| name       | string | null: false |
-| name_kana  | string | null: false |
+| nickname   | string | null: false |
 | email      | string | null: false |
 | password   | string | null: false |
 | first_name | string | null: false |
 | second_name| string | null: false |
+| first_kana | string | null: false |
+| second_kana| string | null: false |
 | birth      | date   | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :comments
-- has_many :credits
 - has_many :destinations
+- has_many :buy_histories
 
 ## items テーブル
 
@@ -26,7 +27,6 @@
 | name    | string     | null: false                    |
 | price   | integer    | null: false                    |
 | user    | references | null: false, foreign_key: true |
-| fee     | integer    | null: false                    |
 
 ### ActiveHash
 
@@ -34,6 +34,7 @@
 | ------- | ---------- | ------------------------------ |
 | category| string     | null: false                    |
 | state   | string     | null: false                    |
+| fee     | integer    | null: false                    |
 | place   | string     | null: false                    |
 | dispatch| string     | null: false                    |
 
@@ -41,8 +42,8 @@
 
 - belongs_to :user
 - has_many :comments
-- has_one :credit
 - has_one :destination
+- has_one :buy_history
 
 ## comments テーブル
 
@@ -50,22 +51,7 @@
 | ------- | ---------- | ------------------------------ |
 | user    | references | null: false, foreign_key: true |
 | item    | references | null: false, foreign_key: true |
-| text    | string     | nill:false                     |
-
-### Association
-
-- belongs_to :user
-- belongs_to :item
-
-## credits テーブル
-
-| Column    | Type       | Options                        |
-| -------   | ---------- | ------------------------------ |
-| user      | references | null: false, foreign_key: true |
-| item      | references | null: false, foreign_key: true |
-| credit    | integer    | nill:false                     |
-| expiration| integer    | nill:false                     |
-| s_cord    | integer    | nill:false                     |
+| text    | string     | null:false                     |
 
 ### Association
 
@@ -78,19 +64,35 @@
 | -------   | ---------- | ------------------------------ |
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
-| postal    | string     | nill:false                     |
-| city      | string     | nill:false                     |
-| address   | string     | nill:false                     |
-| building  | string     | nill:true                      |
-| tel       | string     | nill:false                     |
+| postal    | string     | null:false                     |
+| city      | string     | null:false                     |
+| address   | string     | null:false                     |
+| building  | string     |                                |
+| tel       | string     | null:false                     |
 
 ### ActiveHash
 
 | Column    | Type       | Options                        |
 | -------   | ---------- | ------------------------------ |
-| prefecture| string     | nill:false                     |
+| prefecture| string     | null:false                     |
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- has_many :buy_histories
+
+## buy_histories テーブル
+
+| Column     | Type       | Options                        |
+| -------    | ---------- | ------------------------------ |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
+| destination| references | null: false, foreign_key: true |
+| buy_date   | date       | null:false                     |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+- belongs_to :destination
