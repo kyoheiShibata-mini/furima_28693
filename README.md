@@ -25,6 +25,7 @@
 | ------     | ------     | -----------                    |
 | name       | string     | null: false                    |
 | price      | integer    | null: false                    |
+| explain    | string     | null: false                    |
 | user       | references | null: false, foreign_key: true |
 | category_ah| integer    | null: false                    |
 | state_ah   | integer    | null: false                    |
@@ -42,8 +43,8 @@
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
 | text    | string     | null:false                     |
 
 ### Association
@@ -55,8 +56,8 @@
 
 | Column     | Type       | Options                        |
 | -------    | ---------- | ------------------------------ |
-| user_id    | references | null: false, foreign_key: true |
-| item_id    | references | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -68,7 +69,7 @@
 
 | Column        | Type       | Options                        |
 | -------       | ---------- | ------------------------------ |
-| buy_log_id    | references | null: false, foreign_key: true |
+| buy_log       | reference  | null: false, foreign_key: true |
 | postal        | string     | null:false                     |
 | city          | string     | null:false                     |
 | address       | string     | null:false                     |
