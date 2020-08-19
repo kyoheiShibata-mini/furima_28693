@@ -10,7 +10,7 @@
 | password   | string | null: false |
 | first_name | string | null: false |
 | second_name| string | null: false |
-| birth      | string | null: false |
+| birth      | date   | null: false |
 
 ### Association
 
