@@ -15,14 +15,15 @@ RSpec.describe User, type: :model do
       @user.email = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Email can't be blank")
-    end    
+    end
+    
     it "メールアドレスが重複していると登録できない" do
       another_user = FactoryBot.build(:user)
       another_user.save
       @user.email = another_user.email
       @user.valid?
       expect(@user.errors.full_messages).to include("Email has already been taken")
-    end    
+    end
     it "メールアドレスは@を含む必要があること" do
       @user.email = Faker::Name.name
       @user.valid?
@@ -30,14 +31,22 @@ RSpec.describe User, type: :model do
     end
     it "パスワードが必須であること" do
       @user.password = ""
+      @user.password_confirmation = @user.password
       @user.valid?
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end   
     it "パスワードは6文字未満だと登録できない" do
       @user.password = "00000"
+      @user.password_confirmation = @user.password
       @user.valid?
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
-    end    
+    end
+    it "パスワードは英文字だけだと登録できない" do
+      @user.password = "abcdefg"
+      @user.password_confirmation = @user.password
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password is invalid")
+    end   
     it "パスワードは全角だと登録できない" do
       str = "パスワああああアド"
       @user.password = str
