@@ -11,6 +11,54 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2020_08_19_065723) do
+ActiveRecord::Schema.define(version: 2020_08_20_034021) do
+
+  create_table "buy_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_buy_logs_on_item_id"
+    t.index ["user_id"], name: "index_buy_logs_on_user_id"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.string "text", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_comments_on_item_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "buy_log_id"
+    t.string "postal", null: false
+    t.string "city", null: false
+    t.string "address", null: false
+    t.string "building"
+    t.string "tel", null: false
+    t.integer "prefecture_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buy_log_id"], name: "index_destinations_on_buy_log_id"
+  end
+
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "price", null: false
+    t.string "explain", null: false
+    t.bigint "user_id"
+    t.integer "category_id", null: false
+    t.integer "state_id", null: false
+    t.integer "fee_id", null: false
+    t.integer "place_id", null: false
+    t.integer "dispatch_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
@@ -30,4 +78,10 @@ ActiveRecord::Schema.define(version: 2020_08_19_065723) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "buy_logs", "items"
+  add_foreign_key "buy_logs", "users"
+  add_foreign_key "comments", "items"
+  add_foreign_key "comments", "users"
+  add_foreign_key "destinations", "buy_logs"
+  add_foreign_key "items", "users"
 end
