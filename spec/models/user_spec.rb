@@ -36,20 +36,71 @@ RSpec.describe User, type: :model do
     it "パスワードは6文字未満だと登録できない" do
       @user.password = "00000"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password can't be blank")
+      expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end    
     it "パスワードは全角だと登録できない" do
-      @user.password = "パスワああああアド"
+      str = "パスワああああアド"
+      @user.password = str
+      @user.password_confirmation = str
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password can't be blank")
+      expect(@user.errors.full_messages).to include("Password is invalid")
     end    
     it "パスワードは確認用を含めて2回入力すること" do
       @user.password_confirmation = ""
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password can't be blank")
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-    it "新規登録・ログイン共にエラーハンドリングができていること（適切では無い値が入力された場合、情報は受け入れられず、エラーメッセージを出力させる）" do
-      #テスト内容
+  end
+
+  describe '本人情報確認' do
+    before do
+      @user = FactoryBot.build(:user)
+    end
+
+    it "ユーザー本名が、名字が必須であること" do
+      @user.first_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name can't be blank")
+    end
+    it "ユーザー本名が、名前が必須であること" do
+      @user.second_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Second name can't be blank")
+    end
+    it "苗字は全角（漢字・ひらがな・カタカナ）で入力させること" do
+      @user.first_name = Faker::Name.name
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name is invalid")
+    end 
+    it "名前は全角（漢字・ひらがな・カタカナ）で入力させること" do
+      @user.second_name = Faker::Name.name
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Second name is invalid")
+    end    
+    it "ユーザー苗字のフリガナが必須であること" do
+      @user.first_kana = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First kana can't be blank")
+    end   
+    it "ユーザー名前のフリガナが必須であること" do
+      @user.second_kana = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Second kana can't be blank")
+    end    
+    it "ユーザー苗字のフリガナは全角カタカナであること" do
+      @user.first_kana = "柴田"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First kana is invalid")
+    end   
+    it "ユーザー名前のフリガナは全角カタカナであること" do
+      @user.second_kana = "郷平"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Second kana is invalid")
+    end   
+    it "生年月日が必須であること" do
+      @user.birth = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birth can't be blank")
     end
   end
 end
