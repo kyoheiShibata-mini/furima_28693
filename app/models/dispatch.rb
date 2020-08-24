@@ -1,4 +1,4 @@
-class GenreDispatch < ActiveHash::Base
+class Dispatch < ActiveHash::Base
   self.data = [
     { id: "", name: '---' },
     { id: 1, name: '１〜２日で発送' },

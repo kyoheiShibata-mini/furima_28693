@@ -1,4 +1,4 @@
-class GenreState < ActiveHash::Base
+class State < ActiveHash::Base
   self.data = [
     { id: "", name: '---' },
     { id: 1, name: '新品・未使用' },

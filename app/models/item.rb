@@ -4,11 +4,11 @@ class Item < ApplicationRecord
   has_many :comments
   has_one :buy_log
 
-  belongs_to_active_hash :genre_category
-  belongs_to_active_hash :genre_dispatch
-  belongs_to_active_hash :genre_fee
-  belongs_to_active_hash :genre_place
-  belongs_to_active_hash :genre_state
+  belongs_to_active_hash :category
+  belongs_to_active_hash :dispatch
+  belongs_to_active_hash :fee
+  belongs_to_active_hash :place
+  belongs_to_active_hash :state
 
   has_one_attached :image
 

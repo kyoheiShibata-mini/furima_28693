@@ -4,5 +4,4 @@ Rails.application.routes.draw do
   resources :users, only: [:new,:create]
   resources :furimas, only: [:index,:new,:create]
   resources :items, only: [:show]
-  #get 'posts/:id', to: 'posts#checked'
 end
