@@ -1,4 +1,4 @@
-class GenreFee < ActiveHash::Base
+class Fee < ActiveHash::Base
   self.data = [
     { id: "", name: '---' },
     { id: 1, name: '着払い（購入者負担）' },
