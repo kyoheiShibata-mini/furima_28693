@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: "furimas#index"
   resources :users, only: [:new,:create]
   resources :furimas, only: [:index]
-  resources :items, only: [:show,:edit,:update,:new,:create,:destroy]
+  resources :items, expect: [:index]
 end
