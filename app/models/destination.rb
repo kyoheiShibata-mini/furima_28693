@@ -5,7 +5,7 @@ class Destination < ApplicationRecord
     validates :postal
     validates :prefecture_id
     validates :city
-    validates :address , format: { with: /^\d]{3}[-]\d[4]$/ }
-    validates :tel , format: { with: /^\d]{,11}$/ }
+    validates :address 
+    validates :tel
   end
 end

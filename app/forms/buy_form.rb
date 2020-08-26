@@ -1,15 +1,19 @@
 class BuyForm
 
   include ActiveModel::Model
-  attr_accessor :user_id,:item_id,:postal,:prefecture_id,:city,:address,:building,:tel
+  attr_accessor :user_id,:item_id,:postal,:prefecture_id,:city,:address,:building,:tel,:token
 
   #destinationモデルのバリデーション
+  POSTAL = /\A\d{3}[-]\d{4}\z/
+  TEL = /\A\d{,11}\z/
   with_options presence: true do
-    validates :postal
+    validates :postal, format: { with: POSTAL }
     validates :prefecture_id
     validates :city
-    validates :address
-    validates :tel
+    validates :address 
+    validates :tel , format: { with: TEL }
+
+    validates :token
   end
 
   def save
