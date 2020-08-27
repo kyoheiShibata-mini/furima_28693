@@ -12,7 +12,6 @@ class TransactionsController < ApplicationController
   def create
     @item = Item.find(params[:item_id])
     @buy_form = BuyForm.new(buy_form_params)
-    @buy_form.token = params[:token]
     if @buy_form.valid?
       pay_item
       @buy_form.save
@@ -25,7 +24,7 @@ class TransactionsController < ApplicationController
   private
 
   def buy_form_params
-    params.require(:buy_form).permit(:postal,:prefecture_id,:city,:address,:building,:tel,:token).merge(user_id: current_user.id,item_id: params[:item_id])
+    params.require(:buy_form).permit(:postal,:prefecture_id,:city,:address,:building,:tel).merge(user_id: current_user.id,item_id: params[:item_id],token: params.permit(:token))
   end
 
   def pay_item
