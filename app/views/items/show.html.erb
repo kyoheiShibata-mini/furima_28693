@@ -8,13 +8,11 @@
     </h2>
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outの表示をしましょう。 %>
       <%if @item.buy_log%>
         <div class='sold-out'>
           <span>Sold Out!!</span>
         </div>
       <% end %>
-      <%# //商品が売れている場合は、sold outの表示をしましょう。 %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -23,7 +21,6 @@
       <span class="item-postage">
         (税込) 送料込み
       </span>
-    <%# ログインしていて、なおかつ、ログインしているユーザと出品しているユーザが同一人物でないとき表示しましょう。 %>
       <%if @item.buy_log%>
       <%elsif user_signed_in? && current_user.id == @item.user_id%>
         <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
@@ -32,7 +29,6 @@
       <% else %>
         <%= link_to '購入画面に進む', item_transactions_path(@item.id) ,class:"item-red-btn"%>
       <% end %>
-    <%# //ログインしていて、なおかつ、ログインしているユーザと出品しているユーザが同一人物でないとき表示しましょう。 %>
 
     <div class="item-explain-box">
       <span><%= @item.explain %></span>
