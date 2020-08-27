@@ -1,10 +1,13 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update,:destroy]
-  
+
   def show
   end
 
   def edit
+    if @item.user.id != current_user.id
+      redirect_to root_path
+    end
   end
 
   def update
