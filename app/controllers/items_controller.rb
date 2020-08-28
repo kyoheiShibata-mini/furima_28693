@@ -26,7 +26,8 @@ class ItemsController < ApplicationController
     @item =  Item.new(item_params)
     buy_log = BuyLog.new()
     buy_log.item_id = @item.id
-    if @item.save
+    if @item.valid?
+      @item.save
       redirect_to root_path
     else
       render :new
