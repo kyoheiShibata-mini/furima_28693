@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new,:create]
   resources :furimas, only: [:index]
   resources :items, except: [:index] do  
+    resources :comments, only: :create
     resources :transactions, only: [:index,:create]
   end
 end
