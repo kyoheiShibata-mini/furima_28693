@@ -41,4 +41,6 @@ const pay = () => {
   });
 };
 
-window.addEventListener("load", pay);
+if(document.URL.match("/transactions")){
+  window.addEventListener("load", pay);
+}
