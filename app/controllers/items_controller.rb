@@ -2,7 +2,8 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:edit, :show, :update,:destroy]
 
   def show
-    @comments = @item.comments
+    @comments = @item.comments.sort.reverse
+
     @comment = Comment.new
   end
 

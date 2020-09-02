@@ -1,5 +1,4 @@
 function sales_commission(){
-
   const price = document.getElementById("item-price");
   if (price.getAttribute("data-load") != null) {
     return null;
@@ -13,5 +12,6 @@ function sales_commission(){
     benefit.innerHTML = `${(price.value-price.value * 0.1).toLocaleString()}`;
   })
 }
-
-setInterval(sales_commission, 1000);
+if(document.URL.match("/items/new") || document.URL.match("/items/edit"))  {
+  setInterval(sales_commission, 1000);
+}

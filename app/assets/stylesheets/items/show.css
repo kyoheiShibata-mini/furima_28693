@@ -162,6 +162,25 @@
   text-align: left;
 }
 
+.comment{
+  padding: 10px;
+  border: solid 1px black;
+  margin-bottom: 10px;
+  resize: none;
+
+  background-color: gainsboro;
+}
+
+.comment-user{
+  display: flex;
+  justify-content: left;
+  font-size: small;
+}
+
+.comment-content{
+  font-size: 20px;
+}
+
 .comment-btn {
   line-height: 48px;
   background-color: #3CCACE;

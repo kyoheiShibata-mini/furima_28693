@@ -75,25 +75,27 @@
   <%# /商品の概要 %>
 
   <div class="comment-box">
+  <div id='comments'>
     <%@comments.each do |comment|%>
-      <%=comment.text%>
+      <div class="comment">
+        <p class="comment-user">
+        <%="#{comment.user.nickname}さんのコメント: "%>
+        <%=comment.created_at%>
+        </p>
+        <p class="comment-content"><%= comment.text%></p>
+      </div>
     <% end %>
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
+  </div>
+      <%= form_with model: @comment,url: item_comments_path(@item.id), method: 'post' do |f| %>
+        <%= f.text_field :text,class:"comment-text" %>
+        <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
         不快な言葉遣いなどは利用制限や退会処分となることがあります。
       </p>
-      <h3>mini_talk_app</h3>
-
-      <%= form_with model: @comment,url: item_comments_path(@item.id), method: 'post' do |f| %>
-        <%= f.text_field :text %>
         <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <%= f.submit '送信', class:"comment-btn"%>
-        <span>コメントする<span>
+        <%= f.submit 'コメントする', class:"comment-btn"%>
       <% end %> 
-    </form>
   </div>
   <div class="links">
     <a href="#" class="change-item-btn">

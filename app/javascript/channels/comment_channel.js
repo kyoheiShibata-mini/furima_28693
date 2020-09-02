@@ -10,10 +10,16 @@ consumer.subscriptions.create("CommentChannel", {
   },
 
   received(data) {
-    const html = `<p>${data.content.text}</p>`;
-    const messages = document.getElementById('messages');
-    const newMessage = document.getElementById('message_text');
-    messages.insertAdjacentHTML('afterbegin', html);
-    newMessage.value='';
+    console.log(data)
+    const html = `<div class="comment">
+    <p class="comment-user">
+    ${data.name}さんのコメント: ${data.content.created_at}
+    </p>
+    <p class="comment-content">${data.content.text}</p>
+    </div>`;
+    const comments = document.getElementById('comments');
+    const newComment = document.getElementById('comment_text');
+    comments.insertAdjacentHTML('afterbegin', html);
+    newComment.value='';
   }
 });
