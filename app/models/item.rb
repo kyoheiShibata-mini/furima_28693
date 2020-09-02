@@ -27,4 +27,11 @@ class Item < ApplicationRecord
     validates :user_id
   end
   
+  def previous
+    Item.where("id < ?",id).order("id DESC")
+  end
+
+  def next
+    Item.where("id > ?", id).order("id ASC")
+  end
 end
