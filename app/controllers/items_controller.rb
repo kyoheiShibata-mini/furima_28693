@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
 
   def show
     @comments = @item.comments.sort.reverse
-
     @comment = Comment.new
   end
 

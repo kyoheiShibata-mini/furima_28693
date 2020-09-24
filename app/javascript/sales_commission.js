@@ -11,7 +11,8 @@ function sales_commission(){
     tax.innerHTML = `${(price.value * 0.1).toLocaleString()}`;
     benefit.innerHTML = `${(price.value-price.value * 0.1).toLocaleString()}`;
   })
-}
+};
+
 if(document.URL.match("/items/new") || document.URL.match("/items/edit"))  {
   setInterval(sales_commission, 1000);
 }
